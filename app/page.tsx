@@ -2,18 +2,18 @@
 import React, { useState } from "react";
 
 export default function Home() {
-  const [weight, setWeight] = useState(1);
+  const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
   const [bmi, setBmi] = useState("");
   const [message, setMessage] = useState("");
 
   const calculateBmi = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (weight === 0 || height === 0) {
+    if (weight === 0 || height === 0 || weight === null || height === null) {
       alert("Please enter a valid value");
     } else {
       const bmi = weight / ((height / 100) * (height / 100));
-      setBmi(bmi.toFixed(1));
+      setBmi(bmi.toFixed(2));
 
       if (bmi < 25) {
         setMessage("you are underweight");
@@ -43,16 +43,16 @@ export default function Home() {
             <input
               className="border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
               type="number"
-              placeholder="Enter Your Weight (kg)"
+              placeholder="Enter Your Weight"
               value={weight}
-              onChange={(e) => setWeight(parseFloat(e.target.value) || 0)}
+              onChange={(e) => setWeight(parseFloat(e.target.value))}
             />
             <input
               className="border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
               type="number"
-              placeholder="Enter Your Height (cm)"
+              placeholder="Enter Your Height"
               value={height}
-              onChange={(e) => setHeight(parseFloat(e.target.value) || 0)}
+              onChange={(e) => setHeight(parseFloat(e.target.value))}
             />
           </div>
           <div className="text-center flex justify-center gap-4 *:font-mono">
